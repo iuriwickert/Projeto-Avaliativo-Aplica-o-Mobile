@@ -11,3 +11,4 @@ android/
 *.aab
 coverage/
 *.log
+work/
