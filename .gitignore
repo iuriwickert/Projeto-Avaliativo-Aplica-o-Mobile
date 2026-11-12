@@ -12,3 +12,4 @@ android/
 coverage/
 *.log
 work/
+outputs/

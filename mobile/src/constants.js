@@ -1,0 +1,77 @@
+// Rótulos, exemplos e campos iniciais compartilhados pelas telas.
+const labels = {
+  location: 'Cidade e UF',
+  distributor: 'Distribuidora (se souber)',
+  targetKwhMonth: 'Meta de geração mensal (kWh)',
+  targetSavingsMonth: 'Meta de economia por mês (R$)',
+  coveragePercent: 'Redução desejada da conta (%)',
+  monthlyBill: 'Conta mensal (R$)',
+  budget: 'Orçamento máximo (R$)',
+  availableAreaM2: 'Área livre no telhado (m²)',
+  hspKwhM2Day: 'Irradiação média diária no plano dos módulos (HSP, kWh/m²/dia)',
+  solarSource: 'Fonte da HSP',
+  solarSourceUrl: 'Link da fonte',
+  solarConsultedOn: 'Data consultada (AAAA-MM-DD)',
+  tariff: 'Tarifa evitável (R$/kWh)',
+  tariffTE: 'Tarifa TE (R$/kWh)',
+  tariffTUSD: 'Tarifa TUSD (R$/kWh)',
+  fioBShare: 'Participação do Fio B na TUSD (0 a 1)',
+  gd2Category: 'Categoria de compensação (ex.: GD II)',
+  connectionDate: 'Data do pedido de acesso (AAAA-MM-DD)',
+  targetKwp: 'Potência alvo (kWp)',
+  performanceRatio: 'Fator de desempenho (0 a 1)',
+  costPerKwp: 'Custo de referência (R$/kWp)',
+  selfConsumptionFraction: 'Parcela autoconsumida (0 a 1)'
+};
+
+const placeholders = {
+  location: 'Ex.: Campinas, SP',
+  distributor: 'Ex.: CPFL Paulista',
+  targetKwhMonth: 'Ex.: 500',
+  targetSavingsMonth: 'Ex.: 350',
+  coveragePercent: 'Ex.: 80',
+  monthlyBill: 'Ex.: 450',
+  budget: 'Ex.: 15000',
+  availableAreaM2: 'Ex.: 30',
+  hspKwhM2Day: 'Ex.: 5,0',
+  solarSource: 'Ex.: Atlas Brasileiro de Energia Solar',
+  solarSourceUrl: 'Link da consulta',
+  solarConsultedOn: 'AAAA-MM-DD',
+  tariff: 'Vazio: usa a tarifa-base de R$ 0,81/kWh',
+  tariffTE: 'Ex.: 0,30',
+  tariffTUSD: 'Ex.: 0,50',
+  fioBShare: 'Ex.: 0,35',
+  gd2Category: 'Ex.: GD II',
+  connectionDate: 'AAAA-MM-DD',
+  targetKwp: 'Ex.: 4,5',
+  performanceRatio: 'Vazio: usa 0,75',
+  costPerKwp: 'Vazio: usa R$ 3.170/kWp',
+  selfConsumptionFraction: 'Vazio: usa 0,70'
+};
+
+const blank = {
+  location: '',
+  distributor: '',
+  targetKwhMonth: '',
+  targetSavingsMonth: '',
+  coveragePercent: '',
+  monthlyBill: '',
+  budget: '',
+  availableAreaM2: '',
+  hspKwhM2Day: '',
+  solarSource: '',
+  solarSourceUrl: '',
+  solarConsultedOn: '',
+  tariff: '',
+  tariffTE: '',
+  tariffTUSD: '',
+  fioBShare: '',
+  gd2Category: '',
+  connectionDate: '',
+  targetKwp: '',
+  performanceRatio: '',
+  costPerKwp: '',
+  selfConsumptionFraction: ''
+};
+
+export { blank, labels, placeholders };

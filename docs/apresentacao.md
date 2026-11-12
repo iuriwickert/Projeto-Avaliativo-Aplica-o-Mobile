@@ -6,9 +6,9 @@ Uma família pode conhecer sua conta, orçamento e espaço disponível, mas não
 
 ## 2. Demonstração sugerida
 
-1. Criar uma conta e entrar; mostrar a sessão persistida com SecureStore.
+1. Iniciar a API e o Metro (`npm run api` e `npm run mobile`), abrir com Expo Go compatível com SDK 58 e confirmar que o telefone alcança a API pela mesma rede. Se a rede/firewall impedir o Metro, iniciar `npx expo start --tunnel` na pasta `mobile`. Criar uma conta e entrar; mostrar a sessão persistida com SecureStore e o Bearer Token enviado pelo cliente HTTP.
 2. Criar uma simulação informando meta mensal de geração, cidade e orçamento; deixar campos técnicos vazios.
-3. Mostrar potência estimada, faixa de geração baseada no fallback nacional (se localização faltar), custo residencial histórico e ressalvas.
+3. Mostrar potência estimada, faixa de geração baseada no fallback nacional quando não houver HSP local, custo residencial histórico e ressalvas.
 4. Informar HSP com fonte e data e recalcular; comparar valores informados e assumidos.
 5. Abrir histórico, editar e duplicar uma simulação; comparar dois cenários; excluir um cenário de demonstração.
 6. Demonstrar saída e login. Explicar que logout revoga o `jti` na API.
@@ -16,7 +16,7 @@ Uma família pode conhecer sua conta, orçamento e espaço disponível, mas não
 
 ## 3. Arquitetura e dados
 
-Expo/React Native usa React Navigation. `fetch()` envia JSON à API Express. MySQL guarda `users`, `simulations`, `reference_parameters` e `revoked_tokens`. A simulação armazena entradas e um snapshot do resultado/premissas usados no momento, para preservar a explicação mesmo após atualização de parâmetros.
+O aplicativo Expo usa React Navigation; `mobile/src/screens/` contém as telas, `mobile/src/components/ui.js` os componentes reutilizados, `mobile/src/api/client.js` as chamadas HTTP e `mobile/src/theme.js` os estilos. A API Express separa `routes/`, `controllers/`, `services/`, `repositories/`, `middleware/`, `validation/` e `db/`. Os controllers validam/formatam a resposta HTTP; serviços coordenam autenticação e cálculo; repositórios executam SQL parametrizado pelo pool MySQL. O banco guarda `users`, `simulations`, `reference_parameters` e `revoked_tokens`. Cada simulação persiste entradas e snapshot do resultado/premissas usados.
 
 ## 4. Segurança e autorização
 
@@ -30,11 +30,11 @@ Expo/React Native usa React Navigation. `fetch()` envia JSON à API Express. MyS
 
 ## 5. Cálculo
 
-`kWh/mês ≈ kWp × HSP diária × 30,4375 × PR`. PR começa em 0,75 (premissa EPE), editável. A localização ausente aciona apenas a faixa nacional 4,44–5,48 kWh/m²/dia citada a partir do Atlas INPE, com aviso de incerteza. Com cidade presente, a aplicação não inventa HSP municipal: exige fonte local do Atlas ou cadastro administrativo identificável.
+`kWh/mês ≈ kWp × HSP diária × 30,4375 × PR`. PR começa em 0,75 (premissa EPE), editável. Sem HSP local cadastrada, usa a faixa nacional 4,44–5,48 kWh/m²/dia com aviso de incerteza, mesmo quando foi digitada uma cidade. Para maior precisão, cadastre uma referência do Atlas INPE que corresponda à localidade.
 
-O custo inicial é referência residencial histórica EPE/Greener de jan/2024: R$ 3,17/Wp (R$ 31.700/kWp). Não é preço atual. Orçamento informado é tratado como limite e reduz a potência quando a meta não cabe, exibindo o conflito. Área aparece como restrição a validar: sem dimensões e layout de módulos cadastrados do INMETRO, não se converte área bruta em kWp.
+O custo inicial é referência residencial histórica EPE/Greener de jan/2024: R$ 3,17/Wp, equivalente a R$ 3.170/kWp. Não é preço atual. O orçamento limita a potência quando a meta excede o custo estimado e o conflito é mostrado. A área é uma restrição qualitativa: não se converte área bruta em kWp sem dimensões e layout de módulos.
 
-Economia requer tarifa evitável e perfil de autoconsumo. Quando há tarifa e autoconsumo mas faltam distribuidora, TE/TUSD e Fio B, o app mostra faixa ampla, não deduz 60% da conta. O parâmetro 60% de 2026 fica configurável e ligado à regra GD II; não é aplicado linearmente à tarifa inteira. Payback é simples, sem financiamento, degradação, O&M, troca de inversor ou tarifa mínima.
+Meta de economia e conta mensal usam tarifa-base indicativa de R$ 0,81/kWh quando não há tarifa específica. O resultado apresenta a tarifa utilizada e uma faixa de economia. Autoconsumo parte de 0,70. Sem distribuidora, TE/TUSD e Fio B, não se promete compensação integral; o payback é simples e não inclui financiamento, degradação, O&M, troca de inversor nem tarifa mínima.
 
 ## 6. Referências e limitações
 
