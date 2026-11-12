@@ -12,7 +12,7 @@ Aplicativo mobile para explorar cenários preliminares de energia solar a partir
 
 ## Requisitos
 
-Node.js 20+, npm, MySQL 8+. Expo Go para desenvolvimento (Android/iOS). Para build Android, conta Expo/EAS e `eas-cli`; a API precisa estar publicada em HTTPS e acessível pelo dispositivo.
+Node.js 20+, npm, MySQL 8+. O app usa Expo SDK 58; use Expo Go SDK 58 no Android. Para build Android, conta Expo/EAS e `eas-cli`; a API precisa estar publicada em HTTPS e acessível pelo dispositivo.
 
 ## Executar localmente
 
