@@ -12,7 +12,7 @@ Aplicativo mobile para explorar cenários preliminares de energia solar a partir
 
 ## Requisitos
 
-Node.js 20+, npm e MySQL 8+. O app usa Expo SDK 58, React Native 0.88.1 e React 19.3.0; no Android, use Expo Go compatível com SDK 58 (se a versão da Play Store não for compatível, instale a versão Android correspondente em [expo.dev/go](https://expo.dev/go)). Para APK remoto, é necessária uma conta Expo/EAS autenticada; o backend precisa estar publicado em HTTPS e acessível pelo dispositivo.
+Node.js 20+, npm e MySQL 8+. O app usa Expo SDK 58, React Native 0.88.1 e React 19.3.0; no Android, use Expo Go compatível com SDK 58 (se a versão da Play Store não for compatível, instale a versão Android correspondente em [expo.dev/go](https://expo.dev/go)). Para APK remoto, é necessária uma conta Expo/EAS autenticada.
 
 ## Executar localmente
 
@@ -28,7 +28,9 @@ O primeiro administrador é provisionado na inicialização somente se as duas v
 
 ## Build Android
 
-Para gerar o APK remoto, instale/atualize o EAS CLI (`npm install --global eas-cli`), autentique (`eas login`) e configure o projeto uma vez (`cd mobile && eas build:configure`). Publique a API e configure `EXPO_PUBLIC_API_URL` com a URL HTTPS pública da API no ambiente `production` do EAS; `mobile/.env` é local e ignorado pelo Git, e um IP de rede local/`localhost` não funciona em um APK distribuído. Execute `eas build --platform android --profile production`. Os perfis `preview` e `production` estão definidos como APK em `mobile/eas.json`; o build ainda depende de conta EAS e configuração do projeto. O repositório não inclui credenciais nem um endereço de backend fictício.
+APK gerado pelo EAS: `outputs/solis-android.apk` (perfil `production`, SDK 58). O build usa `EXPO_PUBLIC_API_URL` configurada no ambiente `production` do EAS; neste APK, ela aponta para a API definida para a demonstração local. Para a simulação funcionar, a API precisa estar em execução e o celular precisa alcançar esse endereço pela rede. O arquivo `mobile/.env` continua local e ignorado pelo Git.
+
+Para gerar outro APK, instale/atualize o EAS CLI (`npm install --global eas-cli`), autentique (`eas login`) e configure o projeto uma vez (`cd mobile && eas build:configure`). Execute `eas build --platform android --profile production`. Os perfis `preview` e `production` estão definidos como APK em `mobile/eas.json`.
 
 ## API
 
