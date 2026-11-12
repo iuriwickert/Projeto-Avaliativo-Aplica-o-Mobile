@@ -3,8 +3,10 @@ node_modules/
 .env.*
 !.env.example
 .expo/
+.expo-export/
 dist/
 build/
+android/
 *.apk
 *.aab
 coverage/
