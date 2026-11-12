@@ -1,0 +1,13 @@
+{
+  "name": "solis-simulador-solar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simulador explicável de investimento em energia solar residencial",
+  "workspaces": ["api", "mobile"],
+  "scripts": {
+    "api": "npm --workspace api run dev",
+    "api:start": "npm --workspace api start",
+    "mobile": "npm --workspace mobile start",
+    "test": "npm --workspace api test"
+  }
+}
